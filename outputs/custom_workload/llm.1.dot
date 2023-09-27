@@ -1,0 +1,35 @@
+digraph {
+	graph [bb="0,0,670,183"];
+	node [label="\N"];
+	4	[height=0.51389,
+		id=4,
+		label=COMM_RECV_NODE_Pos_Embed_NONE_0_1,
+		pos="169.5,164.5",
+		rects="0,146.5,339,182.5",
+		shape=record,
+		width=4.7083];
+	6	[height=0.51389,
+		id=6,
+		label=COMP_NODE_Pos_Embed,
+		pos="341.5,91.5",
+		rects="240,73.5,443,109.5",
+		shape=record,
+		width=2.8194];
+	4 -> 6	[pos="e,300.04,109.61 210.7,146.49 234.67,136.6 265.08,124.04 290.55,113.53"];
+	5	[height=0.51389,
+		id=5,
+		label=MEM_LOAD_NODE_Pos_Embed_WEIGHT,
+		pos="513.5,164.5",
+		rects="357,146.5,670,182.5",
+		shape=record,
+		width=4.3472];
+	5 -> 6	[pos="e,382.96,109.61 472.3,146.49 448.33,136.6 417.92,124.04 392.45,113.53"];
+	7	[height=0.51389,
+		id=7,
+		label=COMM_SEND_NODE_Pos_Embed_NONE_1_2,
+		pos="341.5,18.5",
+		rects="171,0.5,512,36.5",
+		shape=record,
+		width=4.7361];
+	6 -> 7	[pos="e,341.5,36.529 341.5,73.313 341.5,65.289 341.5,55.547 341.5,46.569"];
+}
