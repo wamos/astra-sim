@@ -51,6 +51,7 @@ bool HardwareResource::is_available(
       (num_in_flight_comps >= num_npus)) {
     return false;
   } else {
+  // TODO: consider memory capacity for is_available?
     return true;
   }
 }

@@ -43,10 +43,13 @@ Workload::Workload(Sys* sys, string eg_filename, string comm_group_filename) {
   this->et_feeder = new ETFeeder(workload_filename);
   this->comm_group = nullptr;
   // TODO: parametrize the number of available hardware resources
+  // stingw: move this to system/node level for a wider visibility of the hardware
+  // availablity 
   this->hw_resource = new HardwareResource(1);
   this->sys = sys;
   initialize_comm_group(comm_group_filename);
   this->is_finished = false;
+  this->fired_times = 0;
 }
 
 Workload::~Workload() {
@@ -99,7 +102,9 @@ void Workload::issue_dep_free_nodes() {
       push_back_queue.push(node);
     }
     node = et_feeder->getNextIssuableNode();
+    //iterations++;
   }
+  //cout << "sys[" << sys->id << "] total_iterations" << iterations << endl;
 
   while (!push_back_queue.empty()) {
     shared_ptr<Chakra::ETFeederNode> node = push_back_queue.front();
@@ -312,6 +317,7 @@ void Workload::call(EventType event, CallData* data) {
 
   } else {
     if (data == nullptr) {
+      cout << "sys-id:" << sys->id << "issue_dep_free_nodes() at fire-" << fired_times << endl;
       issue_dep_free_nodes();
     } else {
       WorkloadLayerHandlerData* wlhd = (WorkloadLayerHandlerData*)data;
@@ -345,7 +351,11 @@ void Workload::call(EventType event, CallData* data) {
 }
 
 void Workload::fire() {
+  fired_times++;    
+  cout << "--------------------------------------\n";
   call(EventType::General, NULL);
+  cout << "--------------------------------------\n";
+  cout << "sys-id:" << sys->id << "fired_times:" << fired_times << "\n\n";
 }
 
 void Workload::report() {

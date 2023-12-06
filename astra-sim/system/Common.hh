@@ -124,7 +124,15 @@ enum class EventType {
   CollectiveCommunicationFinished,
   CompFinished,
   MemLoadFinished,
-  MemStoreFinished
+  MemStoreFinished,
+  RequsetScheduled,
+  RequsetFinished,
+  PipelineStageScheduled,
+  PipelineStageFinished,
+  IterationScheduled,
+  IterationFinished,
+  SchedulerCalled,
+  SchedulerFinished
 };
 
 class CloneInterface {

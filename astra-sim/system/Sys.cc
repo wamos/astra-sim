@@ -530,6 +530,48 @@ void Sys::call_events() {
   event_queue.erase(Sys::boostedTick());
 }
 
+// stingw: we'll use this to schedule events that are further into the future
+void Sys::register_event(
+    Callable* callable,
+    EventType event,
+    CallData* callData,
+    Tick time_from_start,
+    Tick delta_cycles) {
+  try_register_event(callable, event, callData, time_from_start, delta_cycles);
+}
+
+// stingw: we'll use this to schedule events that are further into the future
+// the original method can only schedule event to current 
+// time using Sys::boostedTick() + delta_cycles.
+// we have the Tick time_from_start that is absoulte time instead of 
+// relative time to the current time
+void Sys::try_register_event(
+    Callable* callable,
+    EventType event,
+    CallData* callData,
+    Tick time_from_start,
+    Tick& delta_cycles) {
+  bool should_schedule = false;
+  auto event_time = time_from_start + delta_cycles;
+  if (event_queue.find(event_time) == event_queue.end()) {
+    list<tuple<Callable*, EventType, CallData*>> tmp;
+    event_queue[event_time] = tmp;
+    should_schedule = true;
+  }
+  event_queue[event_time].push_back(make_tuple(callable, event, callData));
+  if (should_schedule) {
+    timespec_t tmp;
+    tmp.time_val = delta_cycles;
+    BasicEventHandlerData* data =
+        new BasicEventHandlerData(id, EventType::CallEvents);
+    data->sys_id = id;
+    comm_NI->sim_schedule(tmp, &Sys::handleEvent, data);
+  }
+  delta_cycles = 0;
+  pending_events++;
+  return;
+}
+
 void Sys::register_event(
     Callable* callable,
     EventType event,

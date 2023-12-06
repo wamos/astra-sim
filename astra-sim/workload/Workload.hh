@@ -46,6 +46,7 @@ class Workload : public Callable {
   Sys* sys;
   std::unordered_map<int, uint64_t> collective_comm_node_id_map;
   bool is_finished;
+  uint32_t fired_times;
 };
 
 } // namespace AstraSim

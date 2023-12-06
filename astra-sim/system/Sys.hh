@@ -98,10 +98,24 @@ class Sys : public Callable {
       EventType event,
       CallData* callData,
       Tick delta_cycles);
+  // stingw: we'll use this to schedule events that are further into the future 
+  void register_event(
+      Callable* callable,
+      EventType event,
+      CallData* callData,
+      Tick time_from_start,
+      Tick delta_cycles);
   void try_register_event(
       Callable* callable,
       EventType event,
       CallData* callData,
+      Tick& delta_cycles);
+  // stingw: we'll use this to schedule events that are further into the future 
+  void try_register_event(
+      Callable* callable,
+      EventType event,
+      CallData* callData,
+      Tick time_from_start,
       Tick& delta_cycles);
   static void handleEvent(void* arg);
   //---------------------------------------------------------------------------
