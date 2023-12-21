@@ -10,4 +10,8 @@ using namespace AstraSim;
 RequestrHandlerData::RequestrHandlerData() {
   sys_id = 0;
   req_id = 0;
+  iter = 0;
+  stage_id = 0;
+  pipe_req = nullptr;
+  pipe_stage = nullptr;
 }

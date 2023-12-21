@@ -350,6 +350,7 @@ void Workload::call(EventType event, CallData* data) {
   }
 }
 
+// TODO: record the start time
 void Workload::fire() {
   fired_times++;    
   cout << "--------------------------------------\n";

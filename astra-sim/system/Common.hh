@@ -125,6 +125,7 @@ enum class EventType {
   CompFinished,
   MemLoadFinished,
   MemStoreFinished,
+  RequsetQueued,
   RequsetScheduled,
   RequsetFinished,
   PipelineStageScheduled,
