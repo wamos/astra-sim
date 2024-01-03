@@ -4,7 +4,7 @@ SCRIPT_DIR=$(dirname "$(realpath $0)")
 #./build/astra_analytical/build/AnalyticalAstra/bin/AnalyticalAstra
 BINARY="${SCRIPT_DIR:?}"/build/astra_analytical/build/AnalyticalAstra/bin/AnalyticalAstra
 #./inputs/custom_workload/llm
-WORKLOAD="${SCRIPT_DIR:?}"/inputs/custom_workload/llm
+WORKLOAD="${SCRIPT_DIR:?}"/inputs/custom_workload/gpt2
 #./inputs/system/sample_fully_connected_sys.txt
 SYSTEM="${SCRIPT_DIR:?}"/inputs/system/sample_fully_connected_sys.txt
 #./inputs/network/analytical/fully_connected.json

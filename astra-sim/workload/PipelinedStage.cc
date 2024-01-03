@@ -81,7 +81,12 @@ void PipelinedStage::call(EventType event, CallData* data){
             auto req = rqhd->pipe_req;
 
             stage_running_systems--;
-            if (stage_running_systems == 0){  
+            if (stage_running_systems == 0){
+                // TODO: we need to call the scheduler after this to let new request join
+                // With the if (stage_running_systems == 0), I think we can make sure this
+                // call to the scheduler is only once!
+                // systems[sys_id]->register_event(scheduler, EventType::SchedulerCalled, req, current_tick, 0)
+
                 // restore the global state of stage_id and stage_running_systems
                 current_stage_id = 0;
                 stage_running_systems = num_npus_per_stage;
